@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentFlow CRM | Future of Recruitment</title>
+  <meta name="description" content="TalentFlow CRM is a next-generation recruitment platform with AI-driven workflows and seamless API integrations.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0a0c;
+      --accent-cyan: #00d2ff;
+      --accent-purple: #9d50bb;
+      --accent-pink: #ff00c1;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --neon-shadow-cyan: 0 0 15px rgba(0, 210, 255, 0.4);
+      --neon-shadow-purple: 0 0 15px rgba(157, 80, 187, 0.4);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    /* Animated Mesh Background */
+    .mesh-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(157, 80, 187, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 0, 193, 0.05) 0%, transparent 50%);
+      animation: meshMove 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes meshMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 15% 15%; }
+    }
+
+    /* Glassmorphism Classes */
+    .glass-nav {
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 1000;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 35px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
+    }
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-12px) scale(1.02);
+      border-color: var(--accent-cyan);
+      box-shadow: var(--neon-shadow-cyan);
+    }
+
+    .glass-card.purple-hover:hover {
+        border-color: var(--accent-purple);
+        box-shadow: var(--neon-shadow-purple);
+    }
+
+    h1, h2, h3, .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-section {
+      padding: 160px 0 100px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      color: #a0a0a0;
+      max-width: 800px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+
+    .btn-neon {
+      background: transparent;
+      border: 2px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-family: 'Orbitron', sans-serif;
+      padding: 15px 40px;
+      border-radius: 50px;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    .btn-neon:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      box-shadow: 0 0 30px var(--accent-cyan);
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 2.5rem;
+    }
+
+    /* Pricing Section */
+    .price-tag {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 20px 0;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .pricing-feature-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+        color: #bbb;
+    }
+
+    .pricing-feature-list li {
+        margin-bottom: 10px;
+    }
+
+    /* FAQ Custom Styling */
+    .accordion-item {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px !important;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        background: transparent;
+        color: #fff;
+        font-family: 'Orbitron', sans-serif;
+        padding: 20px;
+        box-shadow: none !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--accent-cyan);
+    }
+
+    .accordion-button::after {
+        filter: invert(1);
+    }
+
+    .accordion-body {
+        color: #aaa;
+    }
+
+    /* Newsletter Form */
+    .pulse-form {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .pulse-input {
+        width: 100%;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        padding: 20px 180px 20px 30px;
+        border-radius: 50px;
+        color: #fff;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .pulse-input:focus {
+        border-color: var(--accent-cyan);
+        box-shadow: var(--neon-shadow-cyan);
+    }
+
+    .pulse-btn {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        bottom: 8px;
+        padding: 0 35px;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+        border: none;
+        border-radius: 40px;
+        color: #fff;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+    }
+
+    /* Utilities */
+    .text-gradient-cyan {
+        background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 0;
+      margin-top: 120px;
+      color: #777;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+    @media (max-width: 991px) {
+      .hero-title { font-size: 3.5rem; }
+    }
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.8rem; }
+      .pulse-btn { position: static; width: 100%; margin-top: 15px; }
+      .pulse-input { padding-right: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mesh-bg"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg glass-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">TalentFlow</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link text-light me-4" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link text-light me-4" href="#mission">Mission</a></li>
+          <li class="nav-item"><a class="nav-link text-light me-4" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link text-light me-4" href="#faq">Queries</a></li>
+        </ul>
+        <div class="ms-lg-auto mt-2 mt-lg-0">
+          <a href="#" class="btn-neon btn-sm py-2 px-4" style="font-size: 0.8rem;">Nexus Portal</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container hero-section">
+    <h1 class="hero-title">Nexus for Human Capital</h1>
+    <p class="hero-subtitle">
+      Transcending traditional recruitment. Our neural AI engine powers the world's most 
+      efficient talent matchmaking infrastructure. Seamlessly integrated, hyper-responsive, and ready for tomorrow.
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+        <a href="#features" class="btn-neon">Initialize System</a>
+        <a href="#mission" class="btn-neon" style="border-color: var(--accent-purple); color: var(--accent-purple);">View Protocol</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="container py-5">
+    <h2 class="section-title">Core Capability Modules</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="glass-card">
+          <div class="mb-4" style="font-size: 3rem;">⚡</div>
+          <h3>Warp Post</h3>
+          <p>Instant deployment across high-traffic job boards. No latency. No configuration needed.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="glass-card">
+          <div class="mb-4" style="font-size: 3rem;">🧠</div>
+          <h3>Neural Link</h3>
+          <p>AI-driven candidate matching with 99.8% precision ratings based on performance data.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="glass-card">
+          <div class="mb-4" style="font-size: 3rem;">💠</div>
+          <h3>Omni-API</h3>
+          <p>Unified data streams. Connect LinkedIn, Slack, and Discord in a single handshake.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="glass-card">
+          <div class="mb-4" style="font-size: 3rem;">💹</div>
+          <h3>Funnel Intel</h3>
+          <p>Real-time predictive analytics visualization for every stage of your hiring pipeline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Control Section -->
+  <section id="mission" class="container py-5 mt-5">
+    <div class="glass-card p-5 overflow-hidden">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="mb-4">Mission Control</h2>
+                <p class="lead text-light mb-4">Redefining how the world connects talent to opportunity.</p>
+                <p style="color: #888;">
+                    Founded in 2024, TalentFlow was born from a singular vision: to destroy the friction in hiring. 
+                    We believe that the right person in the right role doesn't just fill a gap—it accelerates human progress. 
+                    Our systems are designed to be invisible, powerful, and ethical.
+                </p>
+                <div class="mt-5 d-flex gap-5">
+                    <div>
+                        <h4 class="text-gradient-cyan">500M+</h4>
+                        <p class="small">Sync Points</p>
+                    </div>
+                    <div>
+                        <h4 class="text-gradient-cyan">12ms</h4>
+                        <p class="small">Response Latency</p>
+                    </div>
+                    <div>
+                        <h4 class="text-gradient-cyan">142</h4>
+                        <p class="small">Global Clusters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Visual representation placeholder -->
+                <div style="background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)); height: 350px; border-radius: 30px; opacity: 0.2; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <div style="position: absolute; width: 150px; height: 150px; border: 2px solid #fff; border-radius: 50%; animation: pulseCircle 4s infinite;"></div>
+                    <div style="font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;">PROTOCOL VALID</div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <style>
+      @keyframes pulseCircle {
+          0% { transform: scale(1); opacity: 0.8; }
+          100% { transform: scale(2.5); opacity: 0; }
+      }
+  </style>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="container py-5 mt-5">
+    <h2 class="section-title">Neural Access Tiers</h2>
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="glass-card text-center">
+                <h3>Pulse</h3>
+                <div class="price-tag">$49<span style="font-size: 1rem; color: #666;">/p-mo</span></div>
+                <ul class="pricing-feature-list">
+                    <li>5 Active Funnel Clusters</li>
+                    <li>Basic AI Matching</li>
+                    <li>2 API Handshakes</li>
+                    <li>Standard Support</li>
+                </ul>
+                <a href="#" class="btn-neon w-100">Initialize</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="glass-card text-center purple-hover" style="border-color: var(--accent-purple); transform: scale(1.05); background: rgba(157, 80, 187, 0.05);">
+                <div class="badge bg-purple position-absolute top-0 start-50 translate-middle py-2 px-4" style="background: var(--accent-purple); border-radius: 50px; font-family: 'Orbitron';">MOST POPULAR</div>
+                <h3 class="mt-3">Nexus</h3>
+                <div class="price-tag text-gradient-cyan">$199<span style="font-size: 1rem; color: #666;">/p-mo</span></div>
+                <ul class="pricing-feature-list">
+                    <li>Unlimited Clusters</li>
+                    <li>Neural AI Matching</li>
+                    <li>Omni-API Integration</li>
+                    <li>Priority Architect Access</li>
+                </ul>
+                <a href="#" class="btn-neon w-100" style="background: var(--accent-cyan); color: #000;">Upgrade to Nexus</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="glass-card text-center">
+                <h3>Singularity</h3>
+                <div class="price-tag">Custom</div>
+                <ul class="pricing-feature-list">
+                    <li>Private Sovereign Clouds</li>
+                    <li>Custom Neural Engines</li>
+                    <li>Whitelabel Core</li>
+                    <li>24/7 Physical Intel</li>
+                </ul>
+                <a href="#" class="btn-neon w-100" style="border-color: #fff; color: #fff;">Contact HQ</a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="section-title">System Queries</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                            How does Neural Matching differ from keyword search?
+                        </button>
+                    </h2>
+                    <div id="c1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Unlike legacy keyword indices, our Neural engine analyzes semantics, career trajectory, and latent skill correlations to identify high-probability fits that traditional tools miss.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                            Can I import legacy candidate data?
+                        </button>
+                    </h2>
+                    <div id="c2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Our ingestion tools support CSV, JSON, and direct sync from major ATS platforms. The system automatically cleans and sanitizes legacy data upon entry.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                            Is the system GDPR/CCPA compliant?
+                        </button>
+                    </h2>
+                    <div id="c3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Every data packet is processed through our Privacy Scrubber which ensures full compliance across all global jurisdictions by default.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="container py-5 mt-5 text-center">
+    <div class="glass-card py-5 px-4" style="border-radius: 50px;">
+        <h2 class="mb-4">Sync with the Pulse</h2>
+        <p class="mb-5 text-muted">Join 10k+ recruiters receiving our weekly intelligence reports.</p>
+        <form class="pulse-form">
+            <input type="email" class="pulse-input" placeholder="Enter your neural address (email)...">
+            <button class="pulse-btn">Sync Pulse</button>
+        </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-md-start mb-4 mb-md-0">
+                <h3 style="font-size: 1.5rem;">TalentFlow</h3>
+                <p class="small">Next-Gen Recruitment Protocol</p>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <p class="mb-1">© 2026 TalentFlow CRM &bull; Nexus Edition</p>
+                <p class="small">Contact: workhello10@gcom</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="#" class="footer-link me-3">Safety</a>
+                <a href="#" class="footer-link me-3">Archive</a>
+                <a href="#" class="footer-link">Protocol</a>
+            </div>
+        </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                const headerOffset = 100;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Subtle parallax effect on scroll
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const mesh = document.querySelector('.mesh-bg');
+        if (mesh) {
+            mesh.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+    });
+
+    // Intersection Observer for fade-in effects
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.8s ease-out';
+        observer.observe(card);
+    });
+  </script>
+</body>
+</html>
